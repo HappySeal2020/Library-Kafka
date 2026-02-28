@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: book-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:6543/library
+    username: postgres
+    password: postgre
+    driver-class-name:  org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  kafka:
+    bootstrap-servers: coonshtuck:9092
+    consumer:
+      group-id: book-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      auto-offset-reset: earliest
+      properties:
+        spring.json.trusted.packages: "*"
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        acks: all
+        retries: 3
+        enable.idempotence: true
+        max.in.flight.requests.per.connection: 5
+
+
+server:
+  port: 8083
+
+logging:
+  level:
+    org.springframework: INFO
+    root: INFO
+    springfox: INFO
+    #org.apache.kafka: DEBUG
