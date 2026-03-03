@@ -24,17 +24,18 @@ public class PublisherController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Publisher create(@RequestBody Publisher publisher) {
+    public Publisher create(@Valid @RequestBody Publisher publisher) {
         return service.create(publisher.getName(), publisher.getSite());
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @Valid @RequestBody Publisher publisher) {
+    public Publisher update(@PathVariable Long id, @Valid @RequestBody Publisher publisher) {
             if (id.equals(publisher.getId())) {
-                service.update(publisher);
+                return service.update(publisher);
             } else {
                 log.warn ("Cannot update publisher with id {} because it does not match {}", id, publisher);
+                return null;
             }
     }
 

@@ -32,9 +32,9 @@ public class PublisherService {
         return publisher;
     }
 
-    public void update(Publisher publisher) {
+    public Publisher update(Publisher publisher) {
         log.info("Updating publisher {}...", publisher);
-        repository.save(publisher);
+        Publisher savedPublisher = repository.save(publisher);
         TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
             @Override
             public void afterCommit() {
@@ -42,5 +42,6 @@ public class PublisherService {
                 log.info("Updated author {} was sent", publisher);
             }
         });
+        return savedPublisher;
     }
 }

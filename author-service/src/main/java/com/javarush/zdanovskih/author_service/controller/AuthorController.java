@@ -23,17 +23,19 @@ public class AuthorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Author create(@RequestBody Author author) {
+    public Author create(@Valid @RequestBody Author author) {
         return service.create(author.getName());
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @Valid @RequestBody Author author) {
+    public Author update(@Valid @PathVariable Long id, @Valid @RequestBody Author author) {
         if (id.equals(author.getId())) {
-            service.update(author);
+            return service.update(author);
+            //return authorRepository.save(author);
         } else {
             log.warn ("Cannot update author with id {} because it does not match {}", id, author);
+            return null;
         }
     }
 

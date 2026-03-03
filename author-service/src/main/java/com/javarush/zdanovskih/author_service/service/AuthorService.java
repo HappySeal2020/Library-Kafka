@@ -34,9 +34,9 @@ public class AuthorService {
 
     //delete author -- from book
 
-    public void update(Author author) {
+    public Author update(Author author) {
         log.info("Updating author {}...", author);
-        repository.save(author);
+        Author savedAuthor=repository.save(author);
         TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
             @Override
             public void afterCommit() {
@@ -44,5 +44,6 @@ public class AuthorService {
                 log.info("Updated author {} was sent", author);
             }
         });
+        return savedAuthor;
     }
 }

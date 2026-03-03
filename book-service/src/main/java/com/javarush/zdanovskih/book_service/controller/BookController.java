@@ -2,6 +2,7 @@ package com.javarush.zdanovskih.book_service.controller;
 
 import com.javarush.zdanovskih.book_service.entity.Book;
 import com.javarush.zdanovskih.book_service.service.BookService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class BookController {
     //CREATE
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Book createBook(@RequestBody Book book) {
+    public Book createBook(@Valid @RequestBody Book book) {
         book.setId(null);
         return bookService.create(book);
     }
@@ -48,7 +49,7 @@ public class BookController {
     //UPDATE
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Book updateBook(@PathVariable Long id, @RequestBody Book book) {
+    public Book updateBook(@PathVariable Long id, @Valid @RequestBody Book book) {
         if (book.getId().equals(id)) {
             log.info("Update book id: {}", id);
             return bookService.create(book);
