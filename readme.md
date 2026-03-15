@@ -13,7 +13,7 @@
 ## 1. Project description
 Library System — микросервисная система для управления библиотекой.
 
-Система состоит из нескольких сервисов:
+Система состоит из трех сервисов:
 - author-service
 - publisher-service
 - book-service
@@ -35,15 +35,15 @@ Testcontainers
 JUnit 5
 
 ## 4. How to run
-git clone https://github.com/username/library-system  
+git clone https://github.com/HappySeal2020/Library-Kafka.git  
 cd library-system  
 docker compose up -d  
 mvn clean install  
 
 ## 5. Services
-author-service: http://localhost:8081  
-publisher-service: http://localhost:8082  
-book-service: http://localhost:8083  
+author-service: http://localhost:8081/final-project/api/authors  
+publisher-service: http://localhost:8082/final-project/api/publishers  
+book-service: http://localhost:8083/final-project/api/books  
 
 _author-service_  
 Обработка авторов книг. У одной книги может быть несколько авторов, а у одного автора - несколько книг.
@@ -86,65 +86,14 @@ Events:
 
 ## 6. Event flow
 
-Author created  
-   |  
-   v  
-author-service  
-   |  
-   v  
-Kafka topic: author-created  
-   |  
-   v  
-book-service  
-   |  
-   v  
-author_cache updated  
-
-
-Publisher created  
-   |  
-   v  
-publisher-service  
-   |  
-   v  
-Kafka topic: publisher-created  
-   |  
-   v  
-book-service  
-   |  
-   v  
-publisher_cache updated  
-
-
-Author deleted  
-   |
-   v
-book-service
-   |
-   v
-Kafka topic: author-deleted
-   |
-   v
-author-service
-   |
-   v
-author deleted
-
-
-Publisher deleted
-   |
-   v
-book-service
-   |
-   v
-Kafka topic: publisher-deleted
-   |
-   v
-publisher-service
-   |
-   v
-publisher deleted
-
+| Event             | Topic             | Producer          | Consumer          |
+-------------------|-------------------|-------------------|-------------------|
+| author created    | author-created    | author-service    | book-service      |
+| author updated    | author-updated    | author-service    | book-service      |
+| publisher created | publisher-created | publisher-service | book-service      |
+| publisher updated | publisher-updated | publisher-service | book-service      |
+| author deleted    | author-deleted    | book-service      | author-service    |
+| publisher deleted | publisher-deleted | book-service      | publisher-service |
 
 ## 7. Database
 Каждый микросервис использует собственную БД.  
