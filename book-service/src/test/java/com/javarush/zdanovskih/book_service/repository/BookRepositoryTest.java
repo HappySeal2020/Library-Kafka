@@ -63,7 +63,7 @@ public class BookRepositoryTest {
                 null, null, null, null, null, null));
         //then
         assertThat(books).hasSize(1);
-        assertThat(books.get(0).getName()).isEqualTo("First book");
+        assertThat(books.getFirst().getName()).isEqualTo("First book");
     }
 
     @Test

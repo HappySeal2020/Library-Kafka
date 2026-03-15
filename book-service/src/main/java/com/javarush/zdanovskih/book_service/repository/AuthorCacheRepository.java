@@ -11,7 +11,7 @@ public interface AuthorCacheRepository extends JpaRepository<AuthorCache, Long> 
        select a from AuthorCache a
        where EXISTS (
        SELECT 1 FROM Book b
-       JOIN b.authors ba 
+       JOIN b.authors ba
        WHERE ba = a
        )
        """)

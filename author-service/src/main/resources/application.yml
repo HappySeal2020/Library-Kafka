@@ -3,9 +3,9 @@ spring:
     name: author-service
 
   datasource:
-    url: jdbc:postgresql://localhost:6543/library
+    url: jdbc:postgresql://localhost:5433/library-author
     username: postgres
-    password: postgre
+    password: postgres
     driver-class-name:  org.postgresql.Driver
 
   jpa:
@@ -34,6 +34,9 @@ spring:
 
     listener:
       ack-mode: record
+
+  flyway:
+    baseline-on-migrate: true
 
 server:
   port: 8081

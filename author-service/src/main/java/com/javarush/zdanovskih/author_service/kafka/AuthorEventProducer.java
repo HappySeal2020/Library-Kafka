@@ -20,6 +20,7 @@ public class AuthorEventProducer {
     public void sendAuthorCreated(Author author) {
         AuthorCreatedEvent event = new AuthorCreatedEvent(author.getId(), author.getName());
         kafkaTemplate.send(AUTHOR_CREATED, event)
+        //kafkaTemplate.send(AUTHOR_CREATED, "invalid-json")
                 .whenComplete((result, ex) ->{
                     if(ex != null){
                         log.error("Failed to send author create event {}", event, ex);

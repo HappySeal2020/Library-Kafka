@@ -3,9 +3,9 @@ spring:
     name: book-service
 
   datasource:
-    url: jdbc:postgresql://localhost:6543/library
+    url: jdbc:postgresql://localhost:5434/library-book
     username: postgres
-    password: postgre
+    password: postgres
     driver-class-name:  org.postgresql.Driver
 
   jpa:
@@ -30,6 +30,8 @@ spring:
         retries: 3
         enable.idempotence: true
         max.in.flight.requests.per.connection: 5
+  flyway:
+    baseline-on-migrate: true
 
 
 server:

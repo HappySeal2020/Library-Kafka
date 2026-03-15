@@ -39,10 +39,6 @@ public class Book {
     @ManyToOne @JoinColumn (name="publisher_id")
     private PublisherCache publisher;
 
-    //private Long publisherId;
-    //@ElementCollection
-    //private List<Long> authorIds;
-
     private String bbk;
 
     private String isbn;

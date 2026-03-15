@@ -44,7 +44,6 @@ public class BookIntegrationTest {
         PublisherCache publisherCache = new PublisherCache(0L, "FastPrint","www.fastprint.com");
         PublisherCache savedPublisherCache = publisherCacheRepository.save(publisherCache);
 
-        //BookCreationDto dto = new BookCreationDto("Adventures of Super Hero", List.of(author), 2000, publisher, "bbk", "isbn", 500);
         Book book = new Book(0L, "Adventures of Super Hero", List.of(savedAuthorCache), 2000,
                 savedPublisherCache, "bbk", "isbn", 500);
 

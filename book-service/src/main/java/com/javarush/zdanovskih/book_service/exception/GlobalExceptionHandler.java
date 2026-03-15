@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<?> handleConstraint(DataIntegrityViolationException ex) {
         String msg = ex.getMostSpecificCause().getMessage();
-        if (msg.contains("Duplicate") || msg.contains("повторяющееся значение ключа нарушает ограничение уникальности")) {
+        if (msg.contains("Duplicate") || msg.contains("повторяющееся значение ключа нарушает ограничение уникальности")|| msg.contains("duplicate key value violates unique constraint")) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body("Data already exists");
         }

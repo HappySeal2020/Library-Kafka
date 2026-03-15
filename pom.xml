@@ -23,10 +23,10 @@
 		<developer/>
 	</developers>
 	<modules>
-		<module>common-events</module>
-		<module>author-service</module>
-		<module>book-service</module>
+        <module>common-events</module>
+        <module>author-service</module>
 		<module>publisher-service</module>
+        <module>book-service</module>
 	</modules>
 	<scm>
 		<connection/>
@@ -52,12 +52,12 @@
 	</dependencies>
 
 	<build>
-		<plugins>
+		<!--<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+		</plugins>-->
 	</build>
 
 </project>

@@ -1,0 +1,23 @@
+spring:
+
+  kafka:
+    #bootstrap-servers: ${spring.embedded.kafka.brokers:localhost:9092}
+    #KAFKA_AUTO_CREATE_TOPICS: true
+    consumer:
+      auto-offset-reset: earliest
+      group-id: test-group
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer:  org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+
+
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  jpa:
+    show-sql: false

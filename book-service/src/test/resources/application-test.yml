@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 3
+      minimum-idle: 1
+    driver-class-name: org.postgresql.Driver
+
+  kafka:
+
+    consumer:
+      auto-offset-reset: earliest
+      group-id: test-group
+      properties:
+        spring.json.trusted.packages: "*"
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  jpa:
+    show-sql: false

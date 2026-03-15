@@ -43,13 +43,10 @@ public class KafkaConsumerConfig {
 
         errorHandler.setRetryListeners(
                 (record, ex, deliveryAttempt) ->
-                {
-                    assert ex != null;
-                    log.warn("Retry attempt {} for record {} due to {}",
-                            deliveryAttempt,
-                            record.value(),
-                            ex.getMessage());
-                }
+                        log.warn("Retry attempt {} for record {} due to {}",
+                                deliveryAttempt,
+                                record.value(),
+                                ex.getMessage())
         );
         return errorHandler;
     }

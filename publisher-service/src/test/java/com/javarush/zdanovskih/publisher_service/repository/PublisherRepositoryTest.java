@@ -49,7 +49,7 @@ public class PublisherRepositoryTest {
         List<Publisher> publishers = publisherRepository.findAll(PublisherSpecification.filter("irs", ""));
         //then
         assertThat(publishers).hasSize(1);
-        assertThat(publishers.get(0).getName()).isEqualTo("first publisher");
+        assertThat(publishers.getFirst().getName()).isEqualTo("first publisher");
     }
 
     @Test

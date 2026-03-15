@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+
+import static com.javarush.zdanovskih.constant.Mapping.REST_AUTHOR_PATH;
 import static org.mockito.Mockito.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.domain.Specification;
@@ -18,7 +20,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static com.javarush.zdanovskih.constant.Mapping.REST_AUTHOR_PATH;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -92,14 +93,7 @@ public class AuthorControllerTest {
     }
 
     // No delete via REST in Author-service
-    /*@Test
-    void shouldDeleteExistingAuthor() throws Exception {
-        Long id = 1L;
-        doNothing().when(authorRepository).deleteById(id);
-        mockMvc.perform(delete(REST_AUTHOR_PATH+"/"+id))
-                .andExpect(status().isNoContent());
-        verify(authorRepository, times(1)).deleteById(id);
-    }*/
+
 
     @Test
     void shouldReturnValidationError() throws Exception {
@@ -119,7 +113,6 @@ public class AuthorControllerTest {
         Author requestAuthor = new Author(0L, "Tolstoy");
 
         //when(authorRepository.save(any()))
-        //        .thenThrow(new DataIntegrityViolationException("Duplicate entry"));
         when(authorService.create(any(String.class) ))
                 .thenThrow(new DataIntegrityViolationException("Duplicate entry"));
 

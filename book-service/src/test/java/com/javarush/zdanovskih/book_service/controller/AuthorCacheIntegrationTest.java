@@ -1,10 +1,7 @@
 package com.javarush.zdanovskih.book_service.controller;
 import com.javarush.zdanovskih.book_service.BookServiceApplication;
 import com.javarush.zdanovskih.book_service.cache.AuthorCache;
-import com.javarush.zdanovskih.book_service.entity.Book;
 import com.javarush.zdanovskih.book_service.repository.AuthorCacheRepository;
-import com.javarush.zdanovskih.book_service.service.BookService;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -39,12 +36,11 @@ public class AuthorCacheIntegrationTest {
 
     @Test
     void shouldDeleteNotExistingAuthor() throws Exception {
-        Long id = Long.MAX_VALUE;
+        long id = Long.MAX_VALUE;
 
         mockMvc.perform(delete(REST_AUTHOR_PATH+"/"+id))
                 .andExpect(status().isBadRequest())
                 .andExpect(content()
                         .string("Data not found"));
-        //verify(authorCacheService, times(1)).deleteAuthorById(id);
     }
 }

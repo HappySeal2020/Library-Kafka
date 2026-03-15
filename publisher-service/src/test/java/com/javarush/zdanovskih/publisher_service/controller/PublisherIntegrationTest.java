@@ -16,7 +16,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Transactional
 @AutoConfigureMockMvc(addFilters = false)
-//@WebMvcTest(controllers = AuthorController.class)
 @SpringBootTest
 public class PublisherIntegrationTest {
     @Autowired

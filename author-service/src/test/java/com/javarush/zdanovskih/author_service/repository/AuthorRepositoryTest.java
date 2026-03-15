@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ContextConfiguration;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
+@Testcontainers
 @ContextConfiguration(classes = AuthorServiceApplication.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class AuthorRepositoryTest {
@@ -51,7 +53,7 @@ public class AuthorRepositoryTest {
         List<Author> authors = authorRepository.findAll(AuthorSpecification.filter("push"));
         //then
         assertThat(authors).hasSize(1);
-        assertThat(authors.get(0).getName()).isEqualTo("Pushkin");
+        assertThat(authors.getFirst().getName()).isEqualTo("Pushkin");
     }
 
     @Test

@@ -116,7 +116,6 @@ public class PublisherControllerTest {
         Publisher requestPublisher = new Publisher(0L, "Super-Print", "www.super-print.com");
 
         //when(publisherRepository.save(any()))
-        //        .thenThrow(new DataIntegrityViolationException("Duplicate entry"));
         when(publisherService.create(any(String.class), any(String.class) ))
                 .thenThrow(new DataIntegrityViolationException("Duplicate entry"));
 

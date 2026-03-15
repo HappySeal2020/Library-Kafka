@@ -1,5 +1,7 @@
 package com.javarush.zdanovskih.book_service.controller;
 
+import com.javarush.zdanovskih.book_service.kafka.AuthorDeletedProducer;
+import com.javarush.zdanovskih.book_service.repository.AuthorCacheRepository;
 import com.javarush.zdanovskih.book_service.service.AuthorCacheService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +22,18 @@ public class AuthorCacheControllerTest {
     private MockMvc mockMvc;
 
     @MockitoBean
+    AuthorCacheRepository authorCacheRepository;
+
+    @MockitoBean
     private AuthorCacheService authorCacheService;
 
+    @MockitoBean
+    AuthorDeletedProducer authorDeletedProducer;
+
     @Test
-    void shouldDeleteExistingAuthor() throws Exception {
+    void shouldDeleteExistingAuthorAndSendEvent() throws Exception {
         Long id = 1L;
+
         doNothing().when(authorCacheService).deleteAuthorById(id);
         mockMvc.perform(delete(REST_AUTHOR_PATH+"/"+id))
                 .andExpect(status().isNoContent());

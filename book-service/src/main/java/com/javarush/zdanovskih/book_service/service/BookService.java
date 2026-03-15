@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -31,12 +32,17 @@ public class BookService {
 
         List<AuthorCache> authors = new ArrayList<>(book.getAuthors());
         for (AuthorCache authorCache : authors) {
-            authorCache.setName(authorCacheRepository.findById(authorCache.getId()).get().getName());
+            if (authorCacheRepository.findById(authorCache.getId()).isPresent()) {
+                authorCache.setName(authorCacheRepository.findById(authorCache.getId()).get().getName());
+            }
+
         }
         book.setAuthors(authors);
         PublisherCache publisher = new PublisherCache();
         publisher.setId(book.getPublisher().getId());
-        publisher.setName(publisherCacheRepository.findById(book.getPublisher().getId()).get().getName());
+        if (publisherCacheRepository.findById(book.getPublisher().getId()).isPresent()) {
+            publisher.setName(publisherCacheRepository.findById(book.getPublisher().getId()).get().getName());
+        }
         book.setPublisher(publisher);
 
         Book saved = bookRepository.save(book);

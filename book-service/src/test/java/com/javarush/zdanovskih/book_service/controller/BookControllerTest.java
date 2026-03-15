@@ -1,6 +1,5 @@
 package com.javarush.zdanovskih.book_service.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javarush.zdanovskih.book_service.cache.AuthorCache;
 import com.javarush.zdanovskih.book_service.cache.PublisherCache;
 import com.javarush.zdanovskih.book_service.entity.Book;
@@ -31,19 +30,11 @@ public class BookControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @MockitoBean
     private BookRepository bookRepository;
 
     @MockitoBean
     private BookService bookService;
-
-    //@BeforeEach
-    //void setup() {
-    //    when(bookRepository.save(any())).thenAnswer(i -> i.getArgument(0));
-    //}
 
     @Test
     void shouldReturnAllBooks() throws Exception {
